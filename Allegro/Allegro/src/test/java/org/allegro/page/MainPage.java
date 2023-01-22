@@ -32,6 +32,12 @@ public class MainPage {
         searchTextBox.clear();
         searchTextBox.sendKeys("Koszula");
         searchButton.click();
+    }
 
+    @FindBy(css = "a[data-role=\"multisearch-button\"]")
+    private WebElement btnMultipleSearch;
+
+    public void multipleSearch() {
+        btnMultipleSearch.click();
     }
 }

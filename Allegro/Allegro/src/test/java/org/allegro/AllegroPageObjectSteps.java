@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.allegro.page.MainPage;
+import org.allegro.page.MultipleResultSearchPage;
+import org.allegro.page.MultipleSearchPage;
 import org.allegro.page.SearchPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -49,5 +51,30 @@ public class AllegroPageObjectSteps {
     public void closeBrowser() {
         //MainPage mainPage = new MainPage(driver);
         driver.quit();
+    }
+
+    // Multiple Search
+    @Then("user click \"szukaj wielu\"")
+    public void btnMultipleSearch() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.multipleSearch();
+    }
+
+    @And("^user search product named (.*) and (.*) and search products$")
+    public void userSearchProductNamedFirstItemAndSecondItem(String firstItem, String secondItem) {
+        MultipleSearchPage multipleSearchPage = new MultipleSearchPage(driver);
+        multipleSearchPage.setNameProducts(firstItem, secondItem);
+    }
+
+    @Then("select sorting on trafność: największa")
+    public void selectSortingOnTrafnoscNajwieksza() {
+        MultipleResultSearchPage multipleResultSearchPage = new MultipleResultSearchPage(driver);
+        multipleResultSearchPage.selectFilterOnHighestAccuracy();
+    }
+
+    @And("^check first variant have in name (.*)$")
+    public void checkFirstVariantHaveInNameFirstItem(String firstItem) {
+        MultipleResultSearchPage multipleResultSearchPage = new MultipleResultSearchPage(driver);
+        multipleResultSearchPage.checkProduct(firstItem);
     }
 }
